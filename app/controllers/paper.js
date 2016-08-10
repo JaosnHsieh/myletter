@@ -12,9 +12,17 @@ router.get('/papers', function (req, res, next) {
     res.render('paper', {
       papers:papers
     });
+
   });
 });
 
+
+router.get('/getpapers', function (req, res, next) {
+  db.Paper.findAll().then(function (papers) {
+
+    res.json(papers);
+  });
+});
 
 // router.get('/paper:id', function (req, res, next) {
 //   models.Todo.find({
@@ -46,6 +54,8 @@ router.post('/paper', function (req, res, next) {
     res.send(req.body.fromtext);
 
   });
+
+  // res.send(req.body);
 });
 
 router.post('/test', function (req, res, next) {

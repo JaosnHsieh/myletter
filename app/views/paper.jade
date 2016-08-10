@@ -1,3 +1,37 @@
 extends layout
 
 block content
+
+
+  div(id="paperDiv")
+  button#btnShow.btn.btn-info(onclick='something()') Load
+  table#example.table.table-striped.table-bordered.table-responsive
+    thead
+      tr
+        th 來文
+        th 來文號
+        th 受文
+        th 發文文號
+        th 摘要
+    tbody#mytbody
+    
+    
+  div.col-xs-4
+    form#paperForm.form-horizontal( method="POST",action="/api/paper")
+      div.form-group  
+          label(for="fromtext") 來文
+          input.form-control(id="fromtext" type="textarea" , name="fromtext" required=true)
+      div.form-group  
+          label(for="fromnumber") 來文號
+          input.form-control(id="fromnumber" type="text" , name="fromnumber")
+      div.form-group  
+          label(for="totext") 受文
+          input.form-control(id="totext" type="textarea" , name="totext")
+      div.form-group  
+          label(for="tonumber") 受文文號
+          input.form-control(id="tonumber" type="text" , name="tonumber")
+      div.form-group  
+          label(for="summary") 摘要
+          input.form-control(id="summary" type="textarea" , name="summary")
+      div.form-group
+          input#btnAdd.form-control.btn-primary(type="submit", value="add")
