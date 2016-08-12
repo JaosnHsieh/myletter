@@ -20,9 +20,6 @@ router.get('/papers', function (req, res, next) {
 router.get('/test', function (req, res, next) {
   console.log(123);
   db.Paper.findAll().then(function (papers) {
-  res.header('Access-Control-Allow-Origin', req.headers.origin || "*");
-  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,HEAD,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'content-Type,x-requested-with');
 
     res.json(papers);
   });
@@ -69,11 +66,6 @@ function storeData(index){
   for(i in updatedData){
     storeData(i);
   }
-  //允許CORS
-  res.header('Access-Control-Allow-Origin', req.headers.origin || "*");
-  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,HEAD,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'content-Type,x-requested-with');
-  //end 允許CORS
 
   res.send(req.body);
 });
@@ -106,15 +98,27 @@ console.log("test222");
               storeData(i);
             }
 
-            //允許CORS
-            res.header('Access-Control-Allow-Origin', req.headers.origin || "*");
-            res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,HEAD,DELETE,OPTIONS');
-            res.header('Access-Control-Allow-Headers', 'content-Type,x-requested-with');
-            //end 允許CORS
+
 
             res.send(req.body);
 
-          });
+  });
+
+
+
+  router.delete('/test2', function (req, res, next) {
+    var deleteId = JSON.parse(req.body.data);
+      db.Paper.destroy({
+          where: {
+            id: deleteId
+          }
+        }).then(function(todo) {
+          res.json('delete successfully!!');
+        });
+
+
+    });
+
 
 
 
